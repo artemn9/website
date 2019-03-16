@@ -1,2 +1,7 @@
-# website
-My personal website (testing the *Now* framework)
+# artem neklyudov
+
+## personal website
+
+Testing the **Now** framework
+
+---
