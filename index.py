@@ -7,5 +7,11 @@ class handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type', 'text/plain')
         self.end_headers()
-        self.wfile.write(str("Hello from Python on Now 2.0!").encode())
+
+        import pymongo
+        client = pymongo.MongoClient("mongodb+srv://artemn9:rDkAH8Npm5XXHaPb@artemn9-mongo-fpjxf.mongodb.net/test?retryWrites=true")
+        db = client.get_database('academic')
+        cl = db.get_collection('papers')
+        for doc in cl.find():
+            self.wfile.write(str(doc).encode())
         return
