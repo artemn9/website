@@ -9,6 +9,11 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
 
         self.wfile.write(str("Hello, getting ready. // ").encode())
+
+        from requests import get
+        ip = get('https://api.ipify.org').text
+        self.wfile.write(str(ip).encode())
+
         import pymongo
         self.wfile.write(str("Pymongo inserted. // ").encode())
         client = pymongo.MongoClient("mongodb+srv://artemn9:rDkAH8Npm5XXHaPb@artemn9-mongo-fpjxf.mongodb.net/test?retryWrites=true")
