@@ -1,2 +1,2 @@
 # website
-My personal website (testing Now framework)
+My personal website (testing the *Now* framework)

@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "python",
+    "name": "personal-website",
     "builds": [
         { "src": "*.py", "use": "@now/python" }
     ]
