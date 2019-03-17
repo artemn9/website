@@ -3,6 +3,7 @@
     "name": "personal-website",
     "builds": [
         { "src": "*.py", "use": "@now/python" },
+        { "src": "index2.html", "use": "@now/html-minifier" },
         { "src": "index.js", "use": "@now/node" }
     ]
 }
