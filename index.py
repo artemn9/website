@@ -15,7 +15,7 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(str(ip).encode())
 
         import pymongo
-        self.wfile.write(str(" - Pymongo inserted. // ").encode())
+        self.wfile.write(str("Pymongo inserted. // ").encode())
         client = pymongo.MongoClient("mongodb+srv://artemn9:rDkAH8Npm5XXHaPb@artemn9-mongo-fpjxf.mongodb.net/test?retryWrites=true")
         db = client.get_database('academic')
         cl = db.get_collection('papers')
