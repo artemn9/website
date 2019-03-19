@@ -4,6 +4,7 @@
     "builds": [
         { "src": "*.py", "use": "@now/python" },
         { "src": "*.png", "use": "@now/static" },
-        { "src": "*.jpg", "use": "@now/static" }
+        { "src": "*.jpg", "use": "@now/static" },
+        { "src": "*.pdf", "use": "@now/static" }
     ]
 }
