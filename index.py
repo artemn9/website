@@ -14,7 +14,7 @@ def working_paper(data):
     if 'comment' not in data:
         data['comment'] = ''
     template = '<h3><A href="{link}" target="blank">{title}</A>'
-    template += ' {comment}</h3><p>{description}</p>'
+    template += '<br />{comment}</h3><p>{description}</p>'
     return template.format(**data)
 
 
