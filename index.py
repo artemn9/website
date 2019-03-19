@@ -2,14 +2,7 @@ from http.server import BaseHTTPRequestHandler
 
 
 def pretty_paper(data):
-    """function converts data on published papers into html"""
-    assert 'cite' in data and 'description' in data
-    template = '<h3>{cite}</h3><p>{description}</p>'
-    return template.format(**data)
-
-
-def working_paper(data):
-    """function converts data on working papers into html"""
+    """function converts data on papers into html"""
     assert 'title' in data and 'link' in data
     if 'comment' not in data:
         data['comment'] = ''
@@ -42,7 +35,7 @@ class handler(BaseHTTPRequestHandler):
         published = papers(pretty_paper, cl.find({"publish": True}))
 
         # working papers
-        working = papers(working_paper, cl.find({"publish": None}))
+        working = papers(pretty_paper, cl.find({"publish": None}))
 
         # get the template of the front-end
         with open('page.html', 'r') as f:
