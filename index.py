@@ -22,7 +22,7 @@ class handler(BaseHTTPRequestHandler):
             abstract=abstract))
 
         # get the template of the front-end
-        with open('/Users/artemn9/now-website/website/page.html', 'r') as f:
+        with open('page.html', 'r') as f:
             z = f.read()
         self.wfile.write(str(z.format(publications=''.join(papers))).encode())
 
