@@ -45,9 +45,9 @@ class handler(BaseHTTPRequestHandler):
         working = papers(working_paper, cl.find({"publish": None}))
 
         # get the template of the front-end
-        with open('page.html', 'r') as f:
+        with open('page.css', 'r') as f:
             html_page = f.read()
-        html_page = html_page.format(published=published, working=working)
+        #html_page = html_page.format(published=published, working=working)
         self.wfile.write(html_page.encode())
 
         return
