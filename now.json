@@ -2,6 +2,8 @@
     "version": 2,
     "name": "personal-website",
     "builds": [
-        { "src": "*.py", "use": "@now/python" }
+        { "src": "*.py", "use": "@now/python" },
+        { "src": "*.png", "use": "@now/static" },
+        { "src": "*.jpg", "use": "@now/static" }
     ]
 }
