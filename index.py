@@ -1,6 +1,28 @@
 from http.server import BaseHTTPRequestHandler
 
 
+def pretty_paper(data):
+    """function converts data on published papers into html"""
+    assert 'cite' in data and 'description' in data
+    template = '<h4>{cite}</h4><p><I>{description}</I></p>'
+    return template.format(**data)
+
+
+def working_paper(data):
+    """function converts data on working papers into html"""
+    assert 'title' in data and 'link' in data
+    if 'comment' not in data:
+        data['comment'] = ''
+    template = '<h4><A href="{link}" target="blank">{title}</A>'
+    template += ' {comment}</h4><p><I>{description}</I></p>'
+    return template.format(**data)
+
+
+def papers(func, what):
+    """function creates text with all papers in html"""
+    return ''.join([func(x) for x in what])
+
+
 class handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
@@ -10,30 +32,22 @@ class handler(BaseHTTPRequestHandler):
 
         # get the mongodb connection:
         import pymongo
-        client = pymongo.MongoClient("mongodb+srv://artemn9:rDkAH8Npm5XXHaPb@artemn9-mongo-fpjxf.mongodb.net/test?retryWrites=true")
+        where = 'artemn9:rDkAH8Npm5XXHaPb@artemn9-mongo-fpjxf.mongodb.net/test'
+        connection = 'mongodb+srv://{where}'.format(where=where)
+        client = pymongo.MongoClient(connection)
         db = client.get_database('academic')
         cl = db.get_collection('papers')
 
         # published papers
-        papers = []
-        for doc in cl.find({"publish": True}):
-            #title = doc['title']
-            abstract = doc['abstract']
-            cite = doc['cite']
-            papers.append('<h4>{cite}</h4><p><I>{abstract}</I></p>'.format(cite=cite,
-            abstract=abstract))
+        published = papers(pretty_paper, cl.find({"publish": True}))
 
         # working papers
-        wpapers = []
-        for wdoc in cl.find({"publish": None}):
-            title = doc['title']
-            wpapers.append('<h4>{title}</h4>'.format(title=title))
-        
+        working = papers(working_paper, cl.find({"publish": None}))
 
         # get the template of the front-end
         with open('page.html', 'r') as f:
-            z = f.read()
-        self.wfile.write(str(z.format(publications=''.join(papers),
-        wpapers=''.join(wpapers))).encode())
+            html_page = f.read()
+        html_page = html_page.format(published=published, working=working)
+        self.wfile.write(html_page.encode())
 
         return
