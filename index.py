@@ -4,7 +4,7 @@ from http.server import BaseHTTPRequestHandler
 def pretty_paper(data):
     """function converts data on published papers into html"""
     assert 'cite' in data and 'description' in data
-    template = '<h4>{cite}</h4><p><I>{description}</I></p>'
+    template = '<h3>{cite}</h3><p>{description}</p>'
     return template.format(**data)
 
 
@@ -13,8 +13,8 @@ def working_paper(data):
     assert 'title' in data and 'link' in data
     if 'comment' not in data:
         data['comment'] = ''
-    template = '<h4><A href="{link}" target="blank">{title}</A>'
-    template += ' {comment}</h4><p><I>{description}</I></p>'
+    template = '<h3><A href="{link}" target="blank">{title}</A>'
+    template += ' {comment}</h3><p>{description}</p>'
     return template.format(**data)
 
 
